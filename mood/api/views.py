@@ -11,6 +11,9 @@ class MoodView(generics.ListCreateAPIView):
         serializer_class = moodSerializer
         permission_classes = [IsAuthenticated]
         
+        def perform_create(self, serializer):
+            return serializer.save(created_by = self.request.user)
+        
         def get_queryset(self):
                 user = self.request.user
                 userFilter = Mood.objects.filter(created_by=user)
@@ -28,6 +31,10 @@ class reasonsTagsView(generics.ListCreateAPIView):
         queryset = ReasonsTag.objects.all()
         serializer_class = reasonsTagsSerializer
         permission_classes = [IsAuthenticated]
+        
+        def perform_create(self, serializer):
+            return serializer.save(created_by = self.request.user)
+        
         
         def get_queryset(self):
                 user = self.request.user
@@ -48,6 +55,9 @@ class feelingsTagsView(generics.ListCreateAPIView):
         queryset = FeelingsTag.objects.all()
         serializer_class = feelingsTagsSerializer
         permission_classes = [IsAuthenticated]
+        
+        def perform_create(self, serializer):
+            return serializer.save(created_by = self.request.user)
         
         def get_queryset(self):
                 user = self.request.user

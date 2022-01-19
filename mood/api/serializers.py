@@ -15,11 +15,6 @@ class reasonsTagsSerializer(serializers.ModelSerializer):
         model = ReasonsTag
         fields = '__all__'
         
-    def save(self, *args, **kwargs):
-        request = self.context.get("request")
-        reasonTag = ReasonsTag(name = self.validated_data['name'], created_by = request.user)
-        reasonTag.save()
-        return reasonTag
         
         
 
@@ -29,7 +24,3 @@ class feelingsTagsSerializer(serializers.ModelSerializer):
         model = FeelingsTag
         exclude = ('created_by', )
         
-    def save(self, *args, **kwargs):
-        feelingsTag = FeelingsTag(name = self.validated_data['name'],created_by=self.context['request'].user.id)
-        feelingsTag.save()
-        return feelingsTag

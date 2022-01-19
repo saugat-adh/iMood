@@ -14,5 +14,4 @@ urlpatterns = [
     #for reasons tags model
     path('reasons/', reasonsTagsView.as_view()),
     path('reason/<int:id>/', reasonsTagsDetailView.as_view()),
-    
 ]
