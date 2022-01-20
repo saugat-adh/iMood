@@ -15,12 +15,10 @@ class reasonsTagsSerializer(serializers.ModelSerializer):
         model = ReasonsTag
         fields = '__all__'
         
-        
-        
 
 class feelingsTagsSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = FeelingsTag
-        exclude = ('created_by', )
+        fields = '__all__'
         

@@ -3,7 +3,6 @@ from mood.models import Mood, FeelingsTag, ReasonsTag
 from .serializers import moodSerializer, reasonsTagsSerializer, feelingsTagsSerializer
 from rest_framework.permissions import IsAuthenticated
 
-
 #######################--------------------- Mood Model ---------------------#######################
 
 class MoodView(generics.ListCreateAPIView):
@@ -25,8 +24,8 @@ class MoodDetailView(generics.RetrieveUpdateDestroyAPIView):
         lookup_field = 'id'
         permission_classes = [IsAuthenticated]
         
-
 #######################--------------------- Reason Tag Model ---------------------#######################
+
 class reasonsTagsView(generics.ListCreateAPIView):
         queryset = ReasonsTag.objects.all()
         serializer_class = reasonsTagsSerializer
