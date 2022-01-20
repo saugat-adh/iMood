@@ -15,7 +15,7 @@ class MoodView(generics.ListCreateAPIView):
         
         def get_queryset(self):
                 user = self.request.user
-                userFilter = Mood.objects.filter(created_by=user)
+                userFilter = Mood.objects.filter(created_by=user).order_by('created')
                 return userFilter
 
 class MoodDetailView(generics.RetrieveUpdateDestroyAPIView):
