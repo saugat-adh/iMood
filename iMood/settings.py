@@ -32,11 +32,14 @@ INSTALLED_APPS = [
     
     'rest_framework.authtoken',
     'rest_framework',
+    'authemail',
     
     'user',
     'mood',
     'medication',
 ]
+
+AUTH_USER_MODEL = 'user.MyUser'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -136,4 +139,15 @@ REST_FRAMEWORK = {
     ]
 }
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' 
+
+EMAIL_FROM = 'example@example.com'
+EMAIL_BCC = 'example@example.com'
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST = config('AUTHEMAIL_EMAIL_HOST')
+EMAIL_PORT = config('AUTHEMAIL_EMAIL_PORT', cast = int)
+EMAIL_USE_TLS = True
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD') 
+
 django_heroku.settings(locals())
+
