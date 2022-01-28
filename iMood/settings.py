@@ -2,6 +2,7 @@ from pathlib import Path
 from decouple import config
 
 import django_heroku
+import os
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -56,7 +57,10 @@ ROOT_URLCONF = 'iMood.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'user/templates'),
+            os.path.join(BASE_DIR, 'iMood/templates')
+            ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -150,4 +154,6 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD') 
 
 django_heroku.settings(locals())
+
+
 
