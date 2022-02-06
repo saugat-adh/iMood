@@ -14,4 +14,9 @@ urlpatterns = [
          name='signup_verified_page'),
     path('signup/not_verified/', views.SignupNotVerifiedFrontEnd.as_view(),
          name='signup_not_verified_page'),
+    
+    path('password/reset/verify/', views.PasswordReset.as_view()),
+    path('password/reset/verified/', views.PasswordFormpage.as_view(), name = 'password_reset_verified_page'),
+    path('password/reset/success/', views.PasswordSuccess.as_view(), name = 'password_reset_success_page'),
+    path('password/reset/error/', views.PasswordError.as_view(), name = 'password_reset_error_page'),
 ]
