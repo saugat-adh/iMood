@@ -45,15 +45,16 @@ class Mood(models.Model):
         return self.title + ' BY ' + str(self.created_by)
     
     
-class ImageModel(models.Model):
-    _id = ObjectIdField(primary_key=True, editable=False)
-    img = CloudinaryField('image')
-    created = models.DateTimeField(auto_now_add = True)
-    created_by = models.ForeignKey(MyUser, on_delete = models.CASCADE, default= 1)
+# class ImageModel(models.Model):
+#     _id = ObjectIdField(primary_key=True, editable=False)
+#     img = CloudinaryField('image')
+#     img_url = models.URLField(blank=True, null=True)
+#     created = models.DateTimeField(auto_now_add = True)
+#     created_by = models.ForeignKey(MyUser, on_delete = models.CASCADE, default= 1)
     
-    def __str__(self):
-        return str(self.created_by) + ' ' +str(self.img)
+#     def __str__(self):
+#         return str(self.created_by) +' ' + str(self.img.url)
     
-@receiver(pre_delete, sender=ImageModel)
-def photo_delete(sender, instance, **kwargs):
-    cloudinary.uploader.destroy(instance.img.public_id)
+# @receiver(pre_delete, sender=ImageModel)
+# def photo_delete(sender, instance, **kwargs):
+#     cloudinary.uploader.destroy(instance.img.public_id)

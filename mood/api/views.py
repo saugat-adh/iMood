@@ -1,6 +1,6 @@
 from rest_framework import generics
-from mood.models import Mood, FeelingsTag, ReasonsTag, ImageModel
-from .serializers import moodSerializer, reasonsTagsSerializer, feelingsTagsSerializer, ImageSerializer
+from mood.models import Mood, FeelingsTag, ReasonsTag
+from .serializers import moodSerializer, reasonsTagsSerializer, feelingsTagsSerializer
 from rest_framework.permissions import IsAuthenticated
 from .permissions import IsUserOrReadOnly
 
@@ -79,16 +79,17 @@ class feelingsTagsDetailView(generics.RetrieveUpdateDestroyAPIView):
         
 #######################--------------------- Image Model ---------------------#######################
 
-class imageModelView(generics.ListCreateAPIView):
-        queryset = ImageModel.objects.all()
-        serializer_class = ImageSerializer
-        permission_classes = [IsAuthenticated]
+# class imageModelView(generics.ListCreateAPIView):
+#         queryset = ImageModel.objects.all()
+#         serializer_class = ImageSerializer
+#         permission_classes = [IsAuthenticated]
         
-        def perform_create(self, serializer):
-            return serializer.save(created_by = self.request.user)
+#         def perform_create(self, serializer):
+#                 print('doing create')
+#                 return serializer.save(created_by = self.request.user)
         
-        def get_queryset(self):
-                user = self.request.user
-                userFilter = ImageModel.objects.filter(created_by=user)
-                return userFilter
+#         def get_queryset(self):
+#                 user = self.request.user
+#                 userFilter = ImageModel.objects.filter(created_by=user)
+#                 return userFilter
         

@@ -1,4 +1,4 @@
-from mood.models import Mood, ReasonsTag, FeelingsTag, ImageModel
+from mood.models import Mood, ReasonsTag, FeelingsTag
 from rest_framework import serializers
 
 class moodSerializer(serializers.ModelSerializer):
@@ -23,10 +23,11 @@ class feelingsTagsSerializer(serializers.ModelSerializer):
         fields = '__all__'
         
         
-class ImageSerializer(serializers.ModelSerializer):
-    
-    class Meta:
-        model = ImageModel
-        fields = '__all__'
+# class ImageSerializer(serializers.ModelSerializer):
         
+#     class Meta:
+#         model = ImageModel
+#         fields = '__all__'
+        
+    
         

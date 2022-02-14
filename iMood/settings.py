@@ -4,11 +4,7 @@ from decouple import config
 import django_heroku
 import os
 
-import cloudinary
 
-cloudinary.config(cloud_name='dvjr02vp5',
-                  api_key='715316532967311',
-                  api_secret='5G7tRnKpH6NkavPSEfosGWa1EI0')
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
