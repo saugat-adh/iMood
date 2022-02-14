@@ -156,4 +156,7 @@ EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 django_heroku.settings(locals())
 
 
+IMPORT_EXPORT_USE_TRANSACTION = False
+
+
 
