@@ -89,13 +89,6 @@ class imageModelView(generics.ListCreateAPIView):
         
         def get_queryset(self):
                 user = self.request.user
-                userFilter = ImageModel.objects.filter(created_by=user).order_by('created')
+                userFilter = ImageModel.objects.filter(created_by=user)
                 return userFilter
         
-        
-class imageModelDetailView(generics.RetrieveUpdateDestroyAPIView):
-        queryset = ImageModel.objects.all()
-        serializer_class = ImageSerializer
-        lookup_field = 'id'
-        permission_classes = [IsAuthenticated, IsUserOrReadOnly
-]

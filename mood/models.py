@@ -51,9 +51,9 @@ class ImageModel(models.Model):
     created = models.DateTimeField(auto_now_add = True)
     created_by = models.ForeignKey(MyUser, on_delete = models.CASCADE, default= 1)
     
-    def _str_(self):
-        return self.created_by + ' || Created on ' + str(self.created)
+    def __str__(self):
+        return str(self.created_by) + ' ' +str(self.img)
     
 @receiver(pre_delete, sender=ImageModel)
 def photo_delete(sender, instance, **kwargs):
-    cloudinary.uploader.destroy(instance.image.public_id)
+    cloudinary.uploader.destroy(instance.img.public_id)
