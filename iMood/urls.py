@@ -1,6 +1,8 @@
 from django.contrib import admin
 from django.urls import path, include
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -23,4 +25,4 @@ urlpatterns = [
     path('email/change/verify/', views.EmailChangeVerifyFrontEnd.as_view()),
     path('email/change/error/', views.EmailChangeNotVerifiedFrontEnd.as_view(), name = 'email_change_not_verified_page'),
     path('email/change/verified/', views.EmailChangeVerifiedFrontEnd.as_view(), name = 'email_change_verified_page'),
-]
+]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 

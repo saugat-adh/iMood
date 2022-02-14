@@ -4,7 +4,15 @@ from decouple import config
 import django_heroku
 import os
 
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME' : 'dvjr02vp5',
+    'API_KEY' : '715316532967311',
+    'API_SECRET' : '5G7tRnKpH6NkavPSEfosGWa1EI0',
+}
 
+
+MEDIA_URL = '/media/'  # or any prefix you choose
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -38,6 +46,7 @@ INSTALLED_APPS = [
     'authemail',
     
     'cloudinary',
+    'cloudinary_storage',
     
     'user',
     'mood',
