@@ -5,9 +5,9 @@ import django_heroku
 import os
 
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME' : 'dvjr02vp5',
-    'API_KEY' : '715316532967311',
-    'API_SECRET' : '5G7tRnKpH6NkavPSEfosGWa1EI0',
+    'CLOUD_NAME' : config('CLOUD_NAME'),
+    'API_KEY' : config('API_KEY'),
+    'API_SECRET' : config('API_SECRET'),
 }
 
 
