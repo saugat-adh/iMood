@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from user.models import MyUser
+from djongo.models.fields import ObjectIdField
 
 # Create your models here.
 
@@ -30,6 +31,11 @@ class Mood(models.Model):
         return self.title + ' BY ' + str(self.created_by)
     
     
+class ImageModel(models.Model):
+    _id = ObjectIdField(primary_key=True, editable=False)
+    img = models.ImageField(upload_to = 'images')
+    created = models.DateTimeField(auto_now_add = True)
+    created_by = models.ForeignKey(MyUser, on_delete = models.CASCADE, default= 1)
     
-
-    
+    def _str_(self):
+        return self.created_by + ' || Created on ' + str(self.created)
