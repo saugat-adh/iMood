@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import MoodView, MoodDetailView, reasonsTagsView, reasonsTagsDetailView, feelingsTagsView, feelingsTagsDetailView
+from .views import MoodView, MoodDetailView, reasonsTagsView, reasonsTagsDetailView, feelingsTagsView, feelingsTagsDetailView, imageModelView
 
 urlpatterns = [
     #for mood model
@@ -14,4 +14,7 @@ urlpatterns = [
     #for reasons tags model
     path('reasons/', reasonsTagsView.as_view()),
     path('reason/<int:id>/', reasonsTagsDetailView.as_view()),
+    
+    #images model
+    path('images/', imageModelView.as_view()),
 ]
