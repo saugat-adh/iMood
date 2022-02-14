@@ -4,6 +4,12 @@ from decouple import config
 import django_heroku
 import os
 
+import cloudinary
+
+cloudinary.config(cloud_name='dvjr02vp5',
+                  api_key='715316532967311',
+                  api_secret='5G7tRnKpH6NkavPSEfosGWa1EI0')
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -34,6 +40,8 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'rest_framework',
     'authemail',
+    
+    'cloudinary',
     
     'user',
     'mood',
@@ -156,7 +164,7 @@ EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 django_heroku.settings(locals())
 
 
-IMPORT_EXPORT_USE_TRANSACTION = False
+BASE_URL = 'http://127.0.0.1:8000/'
 
 
 

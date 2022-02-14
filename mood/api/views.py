@@ -98,5 +98,4 @@ class imageModelDetailView(generics.RetrieveUpdateDestroyAPIView):
         serializer_class = ImageSerializer
         lookup_field = 'id'
         permission_classes = [IsAuthenticated, IsUserOrReadOnly
-                              
-                              ]
+]
