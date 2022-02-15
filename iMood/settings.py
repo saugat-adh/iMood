@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'user',
     'mood',
     'medication',
+    'goal'
 ]
 
 AUTH_USER_MODEL = 'user.MyUser'

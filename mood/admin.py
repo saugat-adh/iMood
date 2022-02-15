@@ -7,3 +7,4 @@ from .models import Mood, ReasonsTag, FeelingsTag
 admin.site.register(Mood)
 admin.site.register(ReasonsTag)
 admin.site.register(FeelingsTag)
+
