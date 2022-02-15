@@ -86,7 +86,7 @@ class feelingsTagsDetailView(generics.RetrieveUpdateDestroyAPIView):
 
 class imageModelView(generics.ListCreateAPIView):
         serializer_class = ImageSerializer
-        permission_classes = [IsAuthenticated]
+        permission_classes = [IsAuthenticated, IsUserOrReadOnly]
         
         def perform_create(self, serializer):
                 return serializer.save(created_by = self.request.user)
