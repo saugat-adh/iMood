@@ -1,25 +1,14 @@
 from django.db import models
-from django.contrib.auth.models import User
 from django.dispatch import receiver
 from user.models import MyUser
 from djongo.models.fields import ObjectIdField
 
-from cloudinary.models import CloudinaryField
+from PIL import Image
+from io import BytesIO
+from django.core.files.uploadedfile import InMemoryUploadedFile
 
-from django.db.models.signals import pre_delete
-import cloudinary
+import sys
 
-import uuid
-
-## models.py
-from django.conf import settings
-
-# Add the import for GridFSStorage
-from djongo.storage import GridFSStorage
-
-# Create your models here.
-
-grid_fs_storage = GridFSStorage(collection='myfiles', base_url=''.join([settings.BASE_URL, 'myfiles/']))
 
 class ReasonsTag(models.Model):
     name = models.CharField(max_length=20)
@@ -52,6 +41,22 @@ class ImageModel(models.Model):
     img = models.ImageField(upload_to = 'mood-images')
     created = models.DateTimeField(auto_now_add = True)
     created_by = models.ForeignKey(MyUser, on_delete = models.CASCADE, default= 1)
+    
+    def save(self, *args, **kwargs):
+        if not self._id:
+            self.img = self.compressImage(self.img)
+        super(ImageModel, self).save(*args, **kwargs)
+        
+    def compressImage(self,uploadedImage):
+        imageTemproary = Image.open(uploadedImage)
+        outputIoStream = BytesIO()
+        imageTemproaryResized = imageTemproary.resize( (1020,573) ) 
+        if imageTemproary.mode != 'RGB':
+            imageTemproary = imageTemproary.convert('RGB')
+        imageTemproary.save(outputIoStream , format='JPEG', quality=60)
+        outputIoStream.seek(0)
+        uploadedImage = InMemoryUploadedFile(outputIoStream,'ImageField', "%s.jpg" % uploadedImage.name.split('.')[0], 'image/jpeg', sys.getsizeof(outputIoStream), None)
+        return uploadedImage
     
     def __str__(self):
         return str(self.created_by) + ' ||| ' + str(self.img)
