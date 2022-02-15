@@ -81,24 +81,19 @@ class feelingsTagsDetailView(generics.RetrieveUpdateDestroyAPIView):
 ######################--------------------- Image Model ---------------------#######################
 
 class imageModelView(generics.ListCreateAPIView):
-        queryset = ImageModel.objects.all()
         serializer_class = ImageSerializer
         permission_classes = [IsAuthenticated]
         
         def perform_create(self, serializer):
-            return serializer.save(created_by = self.request.user)
-        
+                return serializer.save(created_by = self.request.user)
+                
+                
         def get_queryset(self):
                 user = self.request.user
-                userFilter = ImageModel.objects.filter(created_by=user)
-                return userFilter
-        
-        
-class imageModelDetailView(generics.ListAPIView):
-        serializer_class = ImageSerializer
-        permission_classes = [IsAuthenticated, IsUserOrReadOnly]
-        
-        def get_queryset(self):
                 id = self.request.query_params.get('id', None)
-                return ImageModel.objects.filter(_id=ObjectId(id))
+                userFilter = ImageModel.objects.filter(created_by=user)
+                if id == None:
+                        return userFilter
+                else:
+                        return ImageModel.objects.filter(_id=ObjectId(id))
         
