@@ -4,6 +4,16 @@ from decouple import config
 import django_heroku
 import os
 
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME' : config('CLOUD_NAME'),
+    'API_KEY' : config('API_KEY'),
+    'API_SECRET' : config('API_SECRET'),
+}
+
+
+MEDIA_URL = '/media/'  # or any prefix you choose
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -35,10 +45,14 @@ INSTALLED_APPS = [
     'rest_framework',
     'authemail',
     
+    'cloudinary',
+    'cloudinary_storage',
+    
     'user',
     'mood',
     'medication',
-    'goal'
+    'goal',
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 AUTH_USER_MODEL = 'user.MyUser'
@@ -155,6 +169,9 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD') 
 
 django_heroku.settings(locals())
+
+
+BASE_URL = 'http://127.0.0.1:8000/'
 
 
 

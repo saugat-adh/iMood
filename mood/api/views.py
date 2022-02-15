@@ -1,8 +1,13 @@
 from rest_framework import generics
-from mood.models import Mood, FeelingsTag, ReasonsTag
-from .serializers import moodSerializer, reasonsTagsSerializer, feelingsTagsSerializer
+from mood.models import Mood, FeelingsTag, ReasonsTag, ImageModel
+from .serializers import moodSerializer, reasonsTagsSerializer, feelingsTagsSerializer, ImageSerializer
 from rest_framework.permissions import IsAuthenticated
 from .permissions import IsUserOrReadOnly
+from bson.objectid import ObjectId
+
+from rest_framework.response import Response
+from rest_framework import status
+from rest_framework.views import APIView
 
 #######################--------------------- Mood Model ---------------------#######################
 
@@ -71,5 +76,43 @@ class feelingsTagsDetailView(generics.RetrieveUpdateDestroyAPIView):
         queryset = FeelingsTag.objects.all()
         serializer_class = feelingsTagsSerializer
         lookup_field = 'id'
+        permission_classes = [IsAuthenticated, IsUserOrReadOnly
+                              
+                              ]
+        
+        
+        
+######################--------------------- Image Model ---------------------#######################
+
+class imageModelView(generics.ListCreateAPIView):
+        serializer_class = ImageSerializer
         permission_classes = [IsAuthenticated, IsUserOrReadOnly]
+        
+        def perform_create(self, serializer):
+                return serializer.save(created_by = self.request.user)
+                
+                
+        def get_queryset(self):
+                user = self.request.user
+                id = self.request.query_params.get('id', None)
+                userFilter = ImageModel.objects.filter(created_by=user)
+                if id == None:
+                        return userFilter
+                else:
+                        return ImageModel.objects.filter(_id=ObjectId(id))
+     
+
+class deleteImage(APIView):        
+        permission_classes = [IsAuthenticated, IsUserOrReadOnly]
+          
+        def delete(self, request):
+                if request.method == 'DELETE':
+                        id = self.request.query_params.get('id', None)
+                        if id == None:
+                                return Response(status=status.HTTP_404_NOT_FOUND)
+                        else:
+                                file = ImageModel.objects.filter(_id=ObjectId(id))
+                                file.delete()
+                                return Response({"detail":"File was deleted"},status=status.HTTP_200_OK)
+        
         

@@ -74,3 +74,24 @@ class PasswordFormpage(FormView):
         return HttpResponseRedirect(reverse('password_reset_error_page'))
 
 
+
+
+class EmailChangeVerifyFrontEnd(View):
+    def get(self, request, format=None):
+        code = request.GET.get('code', '')
+
+        response = requests.get('https://imood-web-api.herokuapp.com/account/email/change/verify/?code=' + code)
+
+        # Handle other error responses from API
+        if response.status_code==200:
+            return HttpResponseRedirect(reverse('email_change_verified_page'))
+
+        return HttpResponseRedirect(reverse('email_change_not_verified_page'))
+    
+    
+class EmailChangeVerifiedFrontEnd(TemplateView):
+    template_name = 'email_change_verified.html'
+
+
+class EmailChangeNotVerifiedFrontEnd(TemplateView):
+    template_name = 'email_change_error.html'
