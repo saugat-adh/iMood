@@ -51,6 +51,8 @@ INSTALLED_APPS = [
     'user',
     'mood',
     'medication',
+    
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 AUTH_USER_MODEL = 'user.MyUser'
