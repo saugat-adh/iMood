@@ -99,7 +99,7 @@ class imageModelView(generics.ListCreateAPIView):
                 if id == None:
                         return userFilter
                 else:
-                        return ImageModel.objects.filter(_id=ObjectId(id))
+                        return ImageModel.objects.filter(_id=ObjectId(id), created_by=user)
      
 
 class deleteImage(APIView):        
