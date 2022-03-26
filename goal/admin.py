@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import DailyGoal
+from goal.models import Goal
 # Register your models here.
 
-admin.site.register(DailyGoal)
+admin.site.register(Goal)

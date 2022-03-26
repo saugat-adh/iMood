@@ -9,6 +9,7 @@ urlpatterns = [
     path('account/', include('user.api.urls')),
     path('moods/', include('mood.api.urls')),
     path('medication/', include('medication.api.urls')),
+    path('goal/', include('goal.api.urls')),
     
     
     path('signup/verify/', views.SignupVerifyFrontEnd.as_view()),
