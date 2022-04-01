@@ -9,6 +9,8 @@ from django.core.files.uploadedfile import InMemoryUploadedFile
 
 import sys
 
+from .Model.script import getEmotion
+
 
 class ReasonsTag(models.Model):
     name = models.CharField(max_length=20)
@@ -30,7 +32,11 @@ class Mood(models.Model):
     created = models.DateTimeField(auto_now_add = True)
     created_by = models.ForeignKey(MyUser, on_delete = models.CASCADE, default= 1)
     reason_tags = models.ManyToManyField(ReasonsTag)
-    feelings_tags = models.ManyToManyField(FeelingsTag)
+    feelings_tags = models.CharField(max_length=200, blank=True, null=True)
+    
+    def save(self, *args, **kwargs):
+        self.feelings_tags = getEmotion(str(self.description))
+        super(Mood, self).save(*args, **kwargs)
     
     def __str__(self):
         return self.title + ' BY ' + str(self.created_by)
