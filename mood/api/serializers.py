@@ -1,13 +1,6 @@
-from mood.models import Mood, ReasonsTag, FeelingsTag, ImageModel
+from mood.models import Mood, ReasonsTag, ImageModel
 from rest_framework import serializers
-
-class moodSerializer(serializers.ModelSerializer):
-    #user = serializers.StringRelatedField(read_only=True)
-    #reason_tags = serializers.PrimaryKeyRelatedField(many = True, read_only=True)
-    
-    class Meta:
-        model = Mood
-        fields = '__all__'
+from authemail.serializers import UserSerializer
 
 class reasonsTagsSerializer(serializers.ModelSerializer):
     
@@ -15,19 +8,19 @@ class reasonsTagsSerializer(serializers.ModelSerializer):
         model = ReasonsTag
         fields = '__all__'
         
-
-class feelingsTagsSerializer(serializers.ModelSerializer):
-    
-    class Meta:
-        model = FeelingsTag
-        fields = '__all__'
-        
-        
+            
 class ImageSerializer(serializers.ModelSerializer):
+    created_by = UserSerializer(read_only=True)
         
     class Meta:
         model = ImageModel
         fields = '__all__'
         
     
-        
+class moodSerializer(serializers.ModelSerializer):
+    created_by = UserSerializer(read_only=True)
+    reason_tags = reasonsTagsSerializer(many = True, read_only=True)
+    
+    class Meta:
+        model = Mood
+        fields = '__all__'

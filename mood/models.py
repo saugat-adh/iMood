@@ -19,12 +19,6 @@ class ReasonsTag(models.Model):
     def __str__(self):
         return  self.name
     
-class FeelingsTag(models.Model):
-    name = models.CharField(max_length=20)
-    created_by = models.ForeignKey(MyUser, on_delete=models.CASCADE, default= 1)
-    
-    def __str__(self):
-        return self.name
 
 class Mood(models.Model):
     title = models.CharField(max_length=50)
