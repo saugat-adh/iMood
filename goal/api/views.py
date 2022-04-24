@@ -14,7 +14,7 @@ class GoalAV(APIView):
     def post(self, request):
         serializer = GoalSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save()
+            serializer.save(created_by = self.request.user)
             return Response(serializer.data)
         else:
             return Response(serializer.errors)

@@ -3,7 +3,6 @@ from rest_framework import serializers
 from authemail.serializers import UserSerializer
 
 class reasonsTagsSerializer(serializers.ModelSerializer):
-    
     class Meta:
         model = ReasonsTag
         fields = '__all__'
@@ -19,7 +18,6 @@ class ImageSerializer(serializers.ModelSerializer):
     
 class moodSerializer(serializers.ModelSerializer):
     created_by = UserSerializer(read_only=True)
-    reason_tags = reasonsTagsSerializer(many = True, read_only=True)
     
     class Meta:
         model = Mood
