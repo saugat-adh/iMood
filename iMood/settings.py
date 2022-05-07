@@ -174,4 +174,4 @@ django_heroku.settings(locals())
 
 BASE_URL = 'https://imood-webapp.azurewebsites.net/'
 
-
+CSRF_TRUSTED_ORIGINS = ['https://*.imood-webapp.azurewebsites.net','https://*.127.0.0.1']
