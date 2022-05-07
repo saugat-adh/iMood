@@ -1,2 +1,2 @@
 Verify your email address by clicking on this link:
-https://imood-web.azurewebsites.net/signupverify.html/?code={{ code }}
+https://imood-webapp.azurewebsites.net/signupverify.html/?code={{ code }}

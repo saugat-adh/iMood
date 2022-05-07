@@ -9,7 +9,7 @@ import json
 
 from .forms import PasswordResetVerifiedForm
 
-url = 'https://imood-web.azurewebsites.net/account/signup/verify/?code='
+url = 'https://imood-webapp.azurewebsites.net/account/signup/verify/?code='
 
 class SignupVerifyFrontEnd(View):
     def get(self, request, format=None):
