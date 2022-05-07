@@ -1,9 +1,9 @@
 from django.urls import reverse, reverse_lazy
-from django.http import HttpResponseRedirect
 from django.views.generic import TemplateView, FormView
 from django.views.generic.base import View
 from authemail import wrapper
 import requests
+from django.shortcuts import redirect
 
 import json
 
@@ -20,10 +20,10 @@ class SignupVerifyFrontEnd(View):
 
         # Handle other error responses from API
         if response.status_code==200:
-            return HttpResponseRedirect(baseurl + 'signup/verified/')
+            return redirect(baseurl + 'signup/verified/')
 
-        return HttpResponseRedirect(baseurl + 'signup/not_verified/')
-
+        return redirect(baseurl + 'signup/not_verified/')
+redirect
 
 class SignupVerifiedFrontEnd(TemplateView):
     template_name = 'verified_page.html'
@@ -42,9 +42,9 @@ class PasswordReset(View):
         # Handle other error responses from API
         if response.status_code==200:
             request.session['password_reset_code'] = code
-            return HttpResponseRedirect(baseurl + 'password/reset/verified/')
+            return redirect(baseurl + 'password/reset/verified/')
 
-        return HttpResponseRedirect(baseurl + 'password/reset/error/')
+        return redirect(baseurl + 'password/reset/error/')
 
 class PasswordError(TemplateView):
     template_name = 'password_error_page.html'
@@ -72,9 +72,9 @@ class PasswordFormpage(FormView):
         response = requests.post(url, data=params)
         
         if response.status_code==200:
-            return HttpResponseRedirect(baseurl + 'password/reset/success/')
+            return redirect(baseurl + 'password/reset/success/')
 
-        return HttpResponseRedirect(baseurl + 'password/reset/error/')
+        return redirect(baseurl + 'password/reset/error/')
 
 
 
@@ -87,9 +87,9 @@ class EmailChangeVerifyFrontEnd(View):
 
         # Handle other error responses from API
         if response.status_code==200:
-            return HttpResponseRedirect(baseurl + 'email/change/verified/')
+            return redirect(baseurl + 'email/change/verified/')
 
-        return HttpResponseRedirect(baseurl + 'email/change/error/')
+        return redirect(baseurl + 'email/change/error/')
     
     
 class EmailChangeVerifiedFrontEnd(TemplateView):
