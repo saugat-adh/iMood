@@ -9,10 +9,11 @@ from django.core.files.uploadedfile import InMemoryUploadedFile
 
 import sys
 
-from .Model.script import getEmotion
+import requests
 
 
 class ReasonsTag(models.Model):
+    # _id = ObjectIdField(primary_key=True, editable=False)
     name = models.CharField(max_length=20)
     created_by = models.ForeignKey(MyUser, on_delete=models.CASCADE, default= 1)
     
@@ -29,7 +30,8 @@ class Mood(models.Model):
     feelings_tags = models.CharField(max_length=200, blank=True, null=True)
     
     def save(self, *args, **kwargs):
-        self.feelings_tags = getEmotion(str(self.description))
+        self.feelings_tags = requests.get('https://imood-model.azurewebsites.net/prediction/' + str(self.description)).json()
+        #self.feelings_tags = getEmotion(str(self.description))
         super(Mood, self).save(*args, **kwargs)
     
     def __str__(self):

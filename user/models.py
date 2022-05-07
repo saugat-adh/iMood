@@ -7,6 +7,7 @@ from django.dispatch import receiver
 from rest_framework.authtoken.models import Token
 
 class MyUser(EmailAbstractUser):
+    
 	
 	# Required
 	objects = EmailUserManager()

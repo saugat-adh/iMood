@@ -1,7 +1,7 @@
 from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
-from .views import MoodView, MoodDetailView, reasonsTagsView, reasonsTagsDetailView, imageModelView, deleteImage
+from .views import MoodView, MoodDetailView, reasonsTagsView, imageModelView, deleteImage, reasonsTagsDetailView
 
 urlpatterns = [
     #for mood model

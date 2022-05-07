@@ -9,11 +9,13 @@ import json
 
 from .forms import PasswordResetVerifiedForm
 
+url = 'https://imood-web-api.herokuapp.com/account/signup/verify/?code='
+
 class SignupVerifyFrontEnd(View):
     def get(self, request, format=None):
         code = request.GET.get('code', '')
 
-        response = requests.get('https://imood-web-api.herokuapp.com/account/signup/verify/?code=' + code, params=request.GET)
+        response = requests.get(url + code, params=request.GET)
 
         # Handle other error responses from API
         if response.status_code==200:
@@ -34,7 +36,7 @@ class PasswordReset(View):
     def get(self, request, format=None):
         code = request.GET.get('code', '')
 
-        response = requests.get('https://imood-web-api.herokuapp.com/account/password/reset/verify/?code=' + code, params=request.GET)
+        response = requests.get(url + code, params=request.GET)
 
         # Handle other error responses from API
         if response.status_code==200:
@@ -66,7 +68,7 @@ class PasswordFormpage(FormView):
             "password" : password,
         }
         
-        response = requests.post('https://imood-web-api.herokuapp.com/account/password/reset/verified/', data=params)
+        response = requests.post(url, data=params)
         
         if response.status_code==200:
             return HttpResponseRedirect(reverse('password_reset_success_page'))
@@ -80,7 +82,7 @@ class EmailChangeVerifyFrontEnd(View):
     def get(self, request, format=None):
         code = request.GET.get('code', '')
 
-        response = requests.get('https://imood-web-api.herokuapp.com/account/email/change/verify/?code=' + code)
+        response = requests.get(url + code)
 
         # Handle other error responses from API
         if response.status_code==200:

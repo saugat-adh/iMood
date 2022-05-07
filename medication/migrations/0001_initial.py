@@ -15,12 +15,14 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Goal',
+            name='Medications',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('topic', models.CharField(max_length=20)),
-                ('discussion', models.CharField(max_length=20)),
-                ('goals_type', models.CharField(choices=[('Daily', 'Dailygoals'), ('Weekly', 'Weeklygoals'), ('Monthly', 'Monthlygoals')], default='Daily', max_length=9)),
+                ('name', models.CharField(max_length=20)),
+                ('dosage', models.IntegerField()),
+                ('time', models.TimeField()),
+                ('date', models.DateTimeField(auto_now_add=True)),
+                ('intake_type', models.CharField(choices=[('Once Daily', 'DailyIntake'), ('Twice Daily', 'Twice DailyIntake'), ('Other', 'Any other')], default='Once Daily', max_length=20)),
                 ('created_by', models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),
