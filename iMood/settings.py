@@ -174,5 +174,5 @@ django_heroku.settings(locals())
 
 BASE_URL = 'http://127.0.0.1:8000/'
 
-
+SECURE_SSL_REDIRECT = True
 
