@@ -10,6 +10,7 @@ import json
 from .forms import PasswordResetVerifiedForm
 
 url = 'https://imood-webapp.azurewebsites.net/account/signup/verify/?code='
+baseurl = 'https://imood-webapp.azurewebsites.net/'
 
 class SignupVerifyFrontEnd(View):
     def get(self, request, format=None):
@@ -19,9 +20,9 @@ class SignupVerifyFrontEnd(View):
 
         # Handle other error responses from API
         if response.status_code==200:
-            return HttpResponseRedirect(reverse('signup_verified_page'))
+            return HttpResponseRedirect(baseurl + 'signup/verified/')
 
-        return HttpResponseRedirect(reverse('signup_not_verified_page'))
+        return HttpResponseRedirect(baseurl + 'signup/not_verified/')
 
 
 class SignupVerifiedFrontEnd(TemplateView):
@@ -41,9 +42,9 @@ class PasswordReset(View):
         # Handle other error responses from API
         if response.status_code==200:
             request.session['password_reset_code'] = code
-            return HttpResponseRedirect(reverse('password_reset_verified_page'))
+            return HttpResponseRedirect(baseurl + 'password/reset/verified/')
 
-        return HttpResponseRedirect(reverse('password_reset_error_page'))
+        return HttpResponseRedirect(baseurl + 'password/reset/error/')
 
 class PasswordError(TemplateView):
     template_name = 'password_error_page.html'
@@ -71,9 +72,9 @@ class PasswordFormpage(FormView):
         response = requests.post(url, data=params)
         
         if response.status_code==200:
-            return HttpResponseRedirect(reverse('password_reset_success_page'))
+            return HttpResponseRedirect(baseurl + 'password/reset/success/')
 
-        return HttpResponseRedirect(reverse('password_reset_error_page'))
+        return HttpResponseRedirect(baseurl + 'password/reset/error/')
 
 
 
@@ -86,9 +87,9 @@ class EmailChangeVerifyFrontEnd(View):
 
         # Handle other error responses from API
         if response.status_code==200:
-            return HttpResponseRedirect(reverse('email_change_verified_page'))
+            return HttpResponseRedirect(baseurl + 'email/change/verified/')
 
-        return HttpResponseRedirect(reverse('email_change_not_verified_page'))
+        return HttpResponseRedirect(baseurl + 'email/change/error/')
     
     
 class EmailChangeVerifiedFrontEnd(TemplateView):
